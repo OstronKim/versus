@@ -134,18 +134,8 @@ const User = db.define('User', {
 
 function createUser(values) {
   return User
-    .findOne({
-      where: {
-        id: values.id
-      }
-    })
-    .then(user => {
-      if (user === null) {
-        return User
-          .create(values)
-          .then(unwrapInstance)
-      }
-    })
+    .create(values)
+    .then(unwrapInstance)
 }
 
 function updateUser(values) {
@@ -158,7 +148,7 @@ function updateUser(values) {
     .then(user => {
       if (user) {
         return user
-          .updateAttributes(values)
+          .update(values)
           .then(unwrapInstance)
       } else {
         return null
@@ -464,8 +454,9 @@ function deleteParticipant(participateId) {
 function saveParticipant(participateId, values) {
   return findParticipant(participateId)
     .then(participant => {
+      console.log(participant)
       return participant
-        .updateAttributes(values)
+        .update(values)
         .then(unwrapInstance)
     })
 }
