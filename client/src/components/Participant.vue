@@ -159,7 +159,7 @@
           margin-top: 1em;"
       >
         <div id="img-a">
-          <img style="height:300px" :src="choices[0].fullUrl" />
+          <img style="height:300px" :src="referenceImage" />
         </div>
       </md-layout>
     </div>
@@ -207,7 +207,7 @@ function preloadImages (urls) {
       let img = new Image()
       img.src = url
       loadedImages[url] = img
-      console.log('> Particpant.preloadImage', img.src)
+      console.log('> Participant.preloadImage', img.src)
     }
   }
 }
@@ -244,7 +244,8 @@ export default {
       choices: [],
       isChosen: false,
       isLoading: true,
-      experimentAttr: {}
+      experimentAttr: {},
+      referenceImage: null
     }
   },
 
@@ -297,6 +298,23 @@ export default {
 
         this.isLoading = false
         this.choices = _.shuffle(result.choices)
+
+        let allImages = {}
+        let currentID = util.extractId(this.choices[0].fullUrl)
+        for (let url of result.urls) {
+          let img = new Image()
+          img.src = url
+          allImages[url] = img
+        }
+
+        for (let image in allImages) {
+          if (util.extractId(image) === currentID) {
+            if (image.includes('ref')) {
+              this.referenceImage = image
+            }
+          }
+        }
+        this.referenceImage = config.apiUrl + this.referenceImage
 
         if (result.question) {
           this.question = result.question
