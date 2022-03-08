@@ -196,6 +196,11 @@ const Image = db.define('Image', {
   filename: Sequelize.STRING
 })
 
+const RefImage = db.define('RefImage', {
+  url: Sequelize.STRING,
+  filename: Sequelize.STRING
+})
+
 const Participant = db.define('Participant', {
   participateId: {
     primaryKey: true,
@@ -229,6 +234,9 @@ Image.belongsTo(Experiment, {
 Participant.belongsTo(Experiment)
 User.belongsToMany(Experiment, {
   through: UserExperiment
+})
+Experiment.hasMany(RefImage, {
+  as: 'refImages'
 })
 
 /**
@@ -281,13 +289,17 @@ async function createExperiment(userId, attr, imageUrls) {
   let experiment = await Experiment.create({
     attr
   })
+
   for (let url of imageUrls) {
-    let image = await Image.create({
-      url
-    })
-    console.log('   DEBUG addImage! :', experiment.addImage.toString())
-    await experiment.addImage(image)
+    if(url.includes('ref')){
+      let image = await RefImage.create({url})
+      await experiment.addRefImage(image)
+    } else {
+      let image = await Image.create({url})
+      await experiment.addImage(image)
+    }
   }
+
   await experiment.addUser(userId, {
     permission: 0
   })
@@ -312,6 +324,10 @@ function findFullExperiment(experimentId) {
       {
         model: Participant,
         as: 'participants'
+      },
+      {
+        model: RefImage,
+        as: 'refImages'
       }
     ]
   })
@@ -329,6 +345,10 @@ function findExperiment(experimentId) {
       {
         model: User,
         as: 'Users'
+      },
+      {
+        model: RefImage,
+        as: 'refImages'
       }
     ]
   })
@@ -347,6 +367,10 @@ function fetchAllExperiments() {
       {
         model: Participant,
         as: 'participants'
+      },
+      {
+        model: RefImage,
+        as: 'refImages'
       }
     ]
   }).then(experiments => {

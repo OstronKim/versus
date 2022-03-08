@@ -128,9 +128,6 @@
             </div>
 
             <integer-scaling-image :scale="1" :img-url="choice.fullUrl" />
-            <!-- <div id="img-a">
-              <img :src="choice.fullUrl" />
-            </div> -->
           </md-whiteframe>
 
           <div
@@ -159,9 +156,6 @@
         style="
           margin-top: 1em;"
       >
-        <!-- <div id="img-a">
-          <img :src="referenceImage" />
-        </div> -->
         <integer-scaling-image :scale="4" :imgUrl="referenceImage" />
       </md-layout>
     </div>
@@ -303,21 +297,21 @@ export default {
         this.isLoading = false
         this.choices = _.shuffle(result.choices)
 
-        let allImages = {}
-        let currentID = util.extractId(this.choices[0].fullUrl)
-        for (let url of result.urls) {
+        // Get correct reference image to show
+        let currentID = util.extractId(this.choices[0].url)
+        let refImages = {}
+
+        for (let url of result.refUrls) {
           let img = new Image()
           img.src = url
-          allImages[url] = img
+          refImages[url] = img
         }
-
-        for (let image in allImages) {
+        for (let image in refImages) {
           if (util.extractId(image) === currentID) {
-            if (image.includes('ref')) {
-              this.referenceImage = image
-            }
+            this.referenceImage = image
           }
         }
+
         this.referenceImage = config.apiUrl + this.referenceImage
 
         if (result.question) {
