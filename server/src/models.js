@@ -285,6 +285,7 @@ async function createExperiment(userId, attr, imageUrls) {
     let image = await Image.create({
       url
     })
+    console.log('   DEBUG addImage! :', experiment.addImage.toString())
     await experiment.addImage(image)
   }
   await experiment.addUser(userId, {
@@ -365,9 +366,12 @@ function fetchFullExperiment(experimentId) {
 
 async function saveExperimentAttr(experimentId, attr) {
   let experiment = await findExperiment(experimentId)
-  let result = await experiment.updateAttributes({
+  let result = await experiment.update({
     attr
   })
+  // let result = await experiment.updateAttributes({
+  //   attr
+  // })
   return unwrapInstance(result)
 }
 

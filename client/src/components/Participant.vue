@@ -127,9 +127,10 @@
               <md-progress v-if="choice.isClick" md-indeterminate />
             </div>
 
-            <div id="img-a">
+            <integer-scaling-image :scale="1" :img-url="choice.fullUrl" />
+            <!-- <div id="img-a">
               <img :src="choice.fullUrl" />
-            </div>
+            </div> -->
           </md-whiteframe>
 
           <div
@@ -158,9 +159,10 @@
         style="
           margin-top: 1em;"
       >
-        <div id="img-a">
-          <img style="height:300px" :src="referenceImage" />
-        </div>
+        <!-- <div id="img-a">
+          <img :src="referenceImage" />
+        </div> -->
+        <integer-scaling-image :scale="4" :imgUrl="referenceImage" />
       </md-layout>
     </div>
   </div>
@@ -192,6 +194,7 @@ import _ from 'lodash'
 import config from '../config'
 import rpc from '../modules/rpc'
 import util from '../modules/util'
+import IntegerScalingImage from './IntegerScalingImage.vue'
 
 function delay (timeMs) {
   return new Promise(resolve => {
@@ -234,6 +237,7 @@ function areImagesLoaded (urls) {
 
 export default {
   name: 'invite',
+  components: { IntegerScalingImage },
 
   data () {
     return {
