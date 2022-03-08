@@ -348,6 +348,7 @@ async function publicGetNextChoice(participateId) {
   let experiment = await models.fetchExperiment(participant.ExperimentId, false)
   let experimentAttr = experiment.attr
   let urls = _.map(experiment.images, 'url')
+  let refUrls = _.map(experiment.refImages,'url')
   await updateParticipant(participant, experiment)
   console.log(`> handlers.publicGetNextChoice participant`, participateId)
 
@@ -373,6 +374,7 @@ async function publicGetNextChoice(participateId) {
     return {
       status,
       urls,
+      refUrls,
       experimentAttr,
       question,
       choices,

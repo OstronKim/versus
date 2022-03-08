@@ -347,6 +347,10 @@ function findExperiment(experimentId) {
       {
         model: User,
         as: 'Users'
+      },
+      {
+        model: RefImage,
+        as: 'refImages'
       }
     ]
   })
