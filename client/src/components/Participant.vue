@@ -300,6 +300,7 @@ export default {
         this.choices = _.shuffle(result.choices)
 
         let allImages = {}
+        console.log(result.urls)
         let currentID = util.extractId(this.choices[0].fullUrl)
         for (let url of result.urls) {
           let img = new Image()

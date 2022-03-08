@@ -3,20 +3,17 @@
     style="
        padding-left: 1em;
        padding-right: 1em;
-       text-align: left">
+       text-align: left"
+  >
     <h2 class="md-display-2">
       Create Experiment
     </h2>
 
     <div>
-      <md-radio
-        v-model="questionType"
-        md-value="2afc">
+      <md-radio v-model="questionType" md-value="2afc">
         2 alternative forced choice
       </md-radio>
-      <md-radio
-        v-model="questionType"
-        md-value="multiple">
+      <md-radio v-model="questionType" md-value="multiple">
         multiple choice
       </md-radio>
     </div>
@@ -25,30 +22,17 @@
       <label>
         Fraction to be Repeated
       </label>
-      <md-input
-        type="number"
-        :step="0.01"
-        v-model="fractionRepeat"/>
+      <md-input type="number" :step="0.01" v-model="fractionRepeat" />
     </md-input-container>
 
     <md-input-container>
       <label>Name</label>
-      <md-input
-        type="text"
-        name="uploadFiles"
-        v-model="name">
-      </md-input>
+      <md-input type="text" name="uploadFiles" v-model="name"> </md-input>
     </md-input-container>
 
     <md-input-container>
-      <md-file
-        id="file-input"
-        multiple
-        @selected="selectFiles">
-      </md-file>
-      <label
-        for="file-input"
-        class="button">
+      <md-file id="file-input" multiple @selected="selectFiles"> </md-file>
+      <label for="file-input" class="button">
         Upload files
       </label>
     </md-input-container>
@@ -57,53 +41,52 @@
         font-size: 1em;
         color: #999;
         margin-top: -1.5em;
-        line-height: 1.2em">
+        line-height: 1.2em"
+    >
       Images are .png, .jpg, or .gif.
-      <br>
+      <br />
       An image set is defined by an underscore, eg `imageset_*.png`.
-      <br>
+      <br />
       Each image set must have at least 2 images.
-      <br>
-      <br>
+      <br />
+      <br />
     </div>
 
     <md-layout
       v-for="key in textByQuestionType[questionType].sectionKeys"
       :key="key"
       md-row
-      md-vertical-align="start">
-
-      <md-layout
-        md-flex="50"
-        style="padding-right: 1.5em">
+      md-vertical-align="start"
+    >
+      <md-layout md-flex="50" style="padding-right: 1.5em">
         <md-input-container>
           <label> {{ key }} header</label>
-          <md-textarea v-model="textByQuestionType[questionType].sections[key].header"/>
+          <md-textarea
+            v-model="textByQuestionType[questionType].sections[key].header"
+          />
         </md-input-container>
       </md-layout>
 
       <md-layout>
         <md-input-container>
           <label> {{ key }} blurb</label>
-          <md-textarea v-model="textByQuestionType[questionType].sections[key].blurb"/>
+          <md-textarea
+            v-model="textByQuestionType[questionType].sections[key].blurb"
+          />
         </md-input-container>
       </md-layout>
     </md-layout>
 
-    <md-layout
-      md-row
-      md-vertical-align="center">
+    <md-layout md-row md-vertical-align="center">
       <md-button
         type="submit"
         :disabled="isUploading"
         class="md-raised md-primary"
-        @click="submit">
+        @click="submit"
+      >
         Submit
       </md-button>
-      <md-spinner
-        md-indeterminate
-        :md-size="30"
-        v-if="isUploading">
+      <md-spinner md-indeterminate :md-size="30" v-if="isUploading">
       </md-spinner>
     </md-layout>
 
@@ -112,8 +95,9 @@
       style="
         padding-top: 1em;
         padding-left: 1em;
-        color: red">
-      {{error}}
+        color: red"
+    >
+      {{ error }}
     </span>
   </div>
 </template>
@@ -180,17 +164,24 @@ export default {
       isUploading: false,
       error: '',
       textByQuestionType: {
-        'multiple': {
+        multiple: {
           sectionKeys: [
-            'qualificationStart', 'qualificationFailed', 'start', 'running', 'done'],
+            'qualificationStart',
+            'qualificationFailed',
+            'start',
+            'running',
+            'done'
+          ],
           sections: {
             running: {
               header: 'Which image encode the contact shown in the 3D model?',
-              blurb: 'Remember that your answers will be timed and checked for consistency'
+              blurb:
+                'Remember that your answers will be timed and checked for consistency'
             },
             qualificationStart: {
               header: '',
-              blurb: 'You will now start a short qualification test. Please answer carefully'
+              blurb:
+                'You will now start a short qualification test. Please answer carefully'
             },
             done: {
               header: '',
@@ -198,11 +189,13 @@ export default {
             },
             start: {
               header: 'Great Job!',
-              blurb: 'You will now start the survey. Do not forget to copy the survey code provided at the end of the survey, and paste it into the Mechanical Turk page.'
+              blurb:
+                'You will now start the survey. Do not forget to copy the survey code provided at the end of the survey, and paste it into the Mechanical Turk page.'
             },
             qualificationFailed: {
               header: '',
-              blurb: 'Sorry, you have not passed the qualification. Thank you for your time'
+              blurb:
+                'Sorry, you have not passed the qualification. Thank you for your time'
             }
           }
         },
@@ -219,7 +212,8 @@ export default {
             },
             start: {
               header: '',
-              blurb: 'You will now start the survey. Do not forget to copy the survey code provided at the end of the survey, and paste it into the Mechanical Turk page.'
+              blurb:
+                'You will now start the survey. Do not forget to copy the survey code provided at the end of the survey, and paste it into the Mechanical Turk page.'
             }
           }
         }
@@ -227,7 +221,10 @@ export default {
     }
   },
   mounted () {
-    console.log('> CreateExperiment.mounted', util.jstr(this.textByQuestionType))
+    console.log(
+      '> CreateExperiment.mounted',
+      util.jstr(this.textByQuestionType)
+    )
   },
   methods: {
     selectFiles (files) {
@@ -256,7 +253,10 @@ export default {
 
       let response = await rpc.rpcUpload(
         'uploadImagesAndCreateExperiment',
-        this.files, auth.user.id, _.cloneDeep(this.attr))
+        this.files,
+        auth.user.id,
+        _.cloneDeep(this.attr)
+      )
 
       console.log('> CreateExperiment.submit response', response)
 

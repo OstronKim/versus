@@ -196,6 +196,11 @@ const Image = db.define('Image', {
   filename: Sequelize.STRING
 })
 
+const RefImage = db.define('RefImage', {
+  url: Sequelize.STRING,
+  filename: Sequelize.STRING
+})
+
 const Participant = db.define('Participant', {
   participateId: {
     primaryKey: true,
@@ -229,6 +234,9 @@ Image.belongsTo(Experiment, {
 Participant.belongsTo(Experiment)
 User.belongsToMany(Experiment, {
   through: UserExperiment
+})
+Experiment.hasMany(RefImage, {
+  as: 'refImages'
 })
 
 /**
@@ -281,12 +289,19 @@ async function createExperiment(userId, attr, imageUrls) {
   let experiment = await Experiment.create({
     attr
   })
+
   for (let url of imageUrls) {
-    let image = await Image.create({
-      url
-    })
-    await experiment.addImage(image)
+     if(url.includes('ref')){
+       console.log('Url contains ref!')
+       let image = await RefImage.create({url})
+       await experiment.addRefImage(image)
+     } else {
+       console.log('Creating normal Image')
+       let image = await Image.create({url})
+       await experiment.addImage(image)
+     }
   }
+
   await experiment.addUser(userId, {
     permission: 0
   })
@@ -311,6 +326,10 @@ function findFullExperiment(experimentId) {
       {
         model: Participant,
         as: 'participants'
+      },
+      {
+        model: RefImage,
+        as: 'refImages'
       }
     ]
   })
@@ -365,7 +384,7 @@ function fetchFullExperiment(experimentId) {
 
 async function saveExperimentAttr(experimentId, attr) {
   let experiment = await findExperiment(experimentId)
-  let result = await experiment.updateAttributes({
+  let result = await experiment.update({
     attr
   })
   return unwrapInstance(result)
