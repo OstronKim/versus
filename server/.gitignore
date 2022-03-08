@@ -14,7 +14,7 @@ npm-debug.log.*
 
 # Server files
 files/
-*.sqlite3
+*.sqlite
 
 server/yarn.lock
 client/yarn.lock
