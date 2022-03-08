@@ -292,11 +292,9 @@ async function createExperiment(userId, attr, imageUrls) {
 
   for (let url of imageUrls) {
      if(url.includes('ref')){
-       console.log('Url contains ref!')
        let image = await RefImage.create({url})
        await experiment.addRefImage(image)
      } else {
-       console.log('Creating normal Image')
        let image = await Image.create({url})
        await experiment.addImage(image)
      }
@@ -369,6 +367,10 @@ function fetchAllExperiments() {
       {
         model: Participant,
         as: 'participants'
+      },
+      {
+        model: RefImage,
+        as: 'refImages'
       }
     ]
   }).then(experiments => {
