@@ -85,7 +85,7 @@
     </div>
 
     <div v-else-if="status === 'running' || status === 'qualifying'">
-      <md-progress style="height: 8px" :md-progress="progress" />
+      <!-- <md-progress style="height: 8px" :md-progress="progress" /> -->
 
       <md-layout md-align="center" style="padding: 1em">
         <h2 class="md-display-1" style="text-align: center">
