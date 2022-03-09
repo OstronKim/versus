@@ -20,24 +20,35 @@
       </form>
     </div>
 
-    <div v-if="status === 'start'" style="padding: 1em">
-      <h2 class="md-display-1">
-        {{ experimentAttr.text.sections.start.header }}
-      </h2>
+    <div
+      v-if="status === 'start'"
+      style="padding: 1em; position:fixed; width: 100%; height: 100%;"
+    >
+      <md-layout
+        style="padding: 1em; width:100%; height:100%"
+        class="md-display-1 start"
+        md-align="center"
+        md-column
+        md-vertical-align="center"
+      >
+        <h2 class="md-display-2">
+          {{ experimentAttr.text.sections.start.header }}
+        </h2>
 
-      <p>
-        {{ experimentAttr.text.sections.start.blurb }}
-      </p>
+        <p>
+          {{ experimentAttr.text.sections.start.blurb }}
+        </p>
 
-      <form v-on:submit.prevent="startSurvey">
-        <md-button
-          @click="startSurvey"
-          class="md-raised md-primary"
-          style="margin-left: 1em"
-        >
-          Begin
-        </md-button>
-      </form>
+        <form v-on:submit.prevent="startSurvey">
+          <md-button
+            @click="startSurvey"
+            class="md-raised md-primary"
+            style="margin-left: 1em; padding:1em 4em"
+          >
+            Begin
+          </md-button>
+        </form>
+      </md-layout>
     </div>
 
     <div v-else-if="status === 'done'" class="done">
@@ -56,13 +67,13 @@
           {{ experimentAttr.text.sections.done.blurb }}
         </p>
 
-        <md-whiteframe
+        <!-- <md-whiteframe
           style="
             padding: 0.5em;
             text-transform: none;"
         >
           {{ surveyCode }}
-        </md-whiteframe>
+        </md-whiteframe> -->
       </md-layout>
     </div>
 

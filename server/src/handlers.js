@@ -218,11 +218,11 @@ async function updateExperimentAttr(experiment) {
           },
           done: {
             header: '',
-            blurb: 'Your tests are done. Thank you. Your survey code is'
+            blurb: 'Your tests are done. Thank you!'
           },
           start: {
             header: '',
-            blurb: 'You will now start the survey. Do not forget to copy the survey code provided at the end of the survey, and paste it into the Mechanical Turk page.'
+            blurb: 'You will now start the survey.'
           }
         }
       }
