@@ -1,6 +1,6 @@
 <template>
-  <div id="img-a">
-    <img class="integer-scaling" ref="theImage" :src="imgUrl" v-bind:style="{width: calcWidth()}" />
+  <div>
+    <img @load="onImgLoad" class="integer-scaling" ref="theImage" :src="imgUrl" v-bind:style="{width: calcWidth()}" />
   </div>
 </template>
 
@@ -19,11 +19,6 @@ export default {
   },
 
   mounted () {
-    // Wait untill elements are inserted in DOM
-    this.$nextTick(function () {
-      this.$set(this, 'nativeWidth', this.$refs.theImage.naturalWidth)
-    })
-
     const dprChange = () => {
       matchMedia(`(resolution: ${window.devicePixelRatio}dppx)`)
         .addEventListener('change', dprChange, { once: true })
@@ -38,7 +33,17 @@ export default {
     calcWidth () {
       // Set scale to allow for 2x2 pixel size when using high DPI display
       const finalScale = this.scale * Math.round(Math.max(this.pixelRatio, 1))
+      if (this.scale !== 1) {
+        console.log(
+          finalScale * this.nativeWidth / this.pixelRatio + 'px',
+          this.nativeWidth,
+          this.pixelRatio)
+      }
       return finalScale * this.nativeWidth / this.pixelRatio + 'px'
+    },
+
+    onImgLoad () {
+      this.$set(this, 'nativeWidth', this.$refs.theImage.naturalWidth)
     }
   }
 }
