@@ -1,6 +1,6 @@
 <template>
   <div id="img-a">
-    <img class="integer-scaling" ref="theImage" :src="imgUrl" v-bind::style="{width: calcWidth()}" />
+    <img class="integer-scaling" ref="theImage" :src="imgUrl" v-bind:style="{width: calcWidth()}" />
   </div>
 </template>
 
