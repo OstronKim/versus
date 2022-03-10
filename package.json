@@ -52,5 +52,8 @@
     "sequelize-json": "*",
     "shortid": "^2.2.16",
     "sqlite3": "^5.0.2"
+  },
+  "engines": {
+    "node": "16.x"
   }
 }
