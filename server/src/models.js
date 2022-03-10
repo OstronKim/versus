@@ -259,6 +259,8 @@ async function cleanupImages() {
     }
   }
 
+  console.log('  .  ', __dirname)
+  console.log('  .  ', process.cwd())
   for (let expDir of fs.readdirSync('files')) {
     if (!util.isStringInStringList(expDir, filenames)) {
       await rimraf('files/' + expDir)

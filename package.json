@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node app/bin/www",
-    "lint": "eslint --ext .js src"
+    "start": "cd server && node src/bin/www",
+    "lint": "cd server && eslint --ext .js src",
+    "build": "cd client/ && npm install && npm run build"
   },
   "repository": {
     "type": "git",
