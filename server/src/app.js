@@ -86,6 +86,12 @@ if (env === DEVELOPMENT_ENV) {
   console.log(
     `> express-session: Using express-mysql-session SessionStore for ${env} environment`
   )
+} else { // TODO I dont really know what im doing, just testing stuff a bit
+  app.use(session({
+    secret: config.secretKey,
+    saveUninitialized: true,
+    resave: true
+  }))
 }
 
 // User authentication and session management
