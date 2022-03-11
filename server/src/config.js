@@ -2,7 +2,8 @@ const path = require('path')
 
 module.exports = {
   filesDir: path.join(__dirname, '..', 'files'),
-  ip: 'localhost',
+  // ip: 'localhost',
+  ip: '0.0.0.0',
   secretKey: process.env.SECRET_KEY || 'very-nice-dev-secret',
   port: process.env.PORT || 3000,
   development: {
