@@ -55,6 +55,8 @@ const DEVELOPMENT_ENV = 'development'
 const env = process.env.NODE_ENV || DEVELOPMENT_ENV
 const dbConfig = require('./config')[env]
 
+console.log(dbConfig)
+
 if (env === DEVELOPMENT_ENV) {
   app.use(session({
     secret: config.secretKey,
