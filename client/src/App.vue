@@ -7,8 +7,8 @@
 
 <style>
   @import "../node_modules/vue-material/dist/vue-material.css";
-  @import "http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic";
-  @import "http://fonts.googleapis.com/icon?family=Material+Icons";
+  @import "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic";
+  @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 </style>
 
 <script>
