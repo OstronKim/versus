@@ -258,6 +258,7 @@ async function updateDatabaseOnInit() {
   for (let experiment of experiments) {
     await updateExperimentAttr(experiment)
   }
+  console.log('?? Done ish')
 }
 
 setTimeout(updateDatabaseOnInit, 1000)
