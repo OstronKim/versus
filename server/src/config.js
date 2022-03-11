@@ -11,7 +11,8 @@ module.exports = {
     storage: 'database.sqlite'
   },
   production: {
-    host: process.env.HOST,
+    // host: process.env.HOST,
+    host: '0.0.0.0',
     dialect: 'sqlite',
     storage: 'database.sqlite'
   }
