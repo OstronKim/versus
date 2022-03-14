@@ -20,3 +20,4 @@ server/yarn.lock
 client/yarn.lock
 
 src/config.js
+config.js
