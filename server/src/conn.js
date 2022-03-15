@@ -16,7 +16,7 @@ const db = new Sequelize(
   dbConfig.database,
   dbConfig.username,
   dbConfig.password, {
-    host: 'localhost',
+    host: process.env.DATABASE_HOST || 'localhost',
     port: process.env.POSTGRES_PORT,
     dialect: 'postgres',
     logging: false
