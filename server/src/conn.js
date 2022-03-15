@@ -15,8 +15,12 @@ const Sequelize = require('sequelize')
 const db = new Sequelize(
   dbConfig.database,
   dbConfig.username,
-  dbConfig.password,
-  dbConfig)
+  dbConfig.password, {
+    host: 'localhost',
+    port: process.env.POSTGRES_PORT,
+    dialect: 'postgres',
+    logging: false
+  })
 
 // Wipes database if `force: true`
 db.sync({

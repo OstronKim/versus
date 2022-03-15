@@ -21,3 +21,5 @@ client/yarn.lock
 
 src/config.js
 config.js
+
+.env

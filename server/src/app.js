@@ -58,7 +58,6 @@ const dbConfig = require('./config')[env]
 console.log(dbConfig)
 
 if (env === DEVELOPMENT_ENV) {
-  console.log('---------------------------',config.secretKey)
   app.use(session({
     secret: config.secretKey,
     saveUninitialized: true,

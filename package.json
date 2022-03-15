@@ -26,6 +26,7 @@
     "debug": "^4.3.3",
     "del": "^6.0.0",
     "denodeify": "*",
+    "dotenv": "^16.0.0",
     "eslint": "^4.15.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-friendly-formatter": "^3.0.0",
