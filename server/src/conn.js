@@ -12,15 +12,24 @@ const app = express()
 const env = process.env.NODE_ENV || 'development'
 const dbConfig = require('./config')[env]
 const Sequelize = require('sequelize')
-const db = new Sequelize(
-  dbConfig.database,
-  dbConfig.username,
-  dbConfig.password, {
-    host: process.env.DATABASE_HOST || 'localhost',
-    port: process.env.POSTGRES_PORT,
-    dialect: 'postgres',
-    logging: false
-  })
+// const db = new Sequelize(
+//   dbConfig.database,
+//   dbConfig.username,
+//   dbConfig.password, {
+//     host: process.env.DATABASE_HOST || 'localhost',
+//     port: process.env.POSTGRES_PORT,
+//     dialect: 'postgres',
+//     logging: false
+//   })
+const db = new Sequelize(process.env.DATABASE_URL, {
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  }
+})
+db.authenticate()
 
 // Wipes database if `force: true`
 db.sync({
