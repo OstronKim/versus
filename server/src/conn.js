@@ -30,6 +30,12 @@ const db = new Sequelize(process.env.DATABASE_URL, {
   }
 })
 db.authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.')
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err)
+  })
 
 // Wipes database if `force: true`
 db.sync({

@@ -13,7 +13,7 @@ npm-debug.log
 npm-debug.log.*
 
 # Server files
-files/
+#files/
 *.sqlite
 
 server/yarn.lock
