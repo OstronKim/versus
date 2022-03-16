@@ -134,7 +134,7 @@
               margin-left: 1em;
               margin-right: 1em"
           >
-            <div style="height: 12px;">
+            <div style="height: 1px;">
               <md-progress v-if="choice.isClick" md-indeterminate />
             </div>
 
@@ -167,7 +167,7 @@
         style="
           margin-top: 1em;"
       >
-        <integer-scaling-image :scale="4" :imgUrl="referenceImage" />
+        <integer-scaling-image :scale="1" :imgUrl="referenceImage" />
       </md-layout>
     </div>
   </div>
