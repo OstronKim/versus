@@ -158,17 +158,19 @@
         </md-layout>
       </md-layout>
 
-      <md-layout md-align="center">
-        <h2>Reference image</h2>
-      </md-layout>
+      <div v-if="refImageExists">
+        <md-layout md-align="center">
+          <h2>Reference image</h2>
+        </md-layout>
 
-      <md-layout
-        md-align="center"
-        style="
+        <md-layout
+          md-align="center"
+          style="
           margin-top: 1em;"
-      >
-        <integer-scaling-image :scale="1" :imgUrl="referenceImage" />
-      </md-layout>
+        >
+          <integer-scaling-image :scale="1" :imgUrl="referenceImage" />
+        </md-layout>
+      </div>
     </div>
   </div>
 </template>
@@ -254,7 +256,8 @@ export default {
       isChosen: false,
       isLoading: true,
       experimentAttr: {},
-      referenceImage: null
+      referenceImage: null,
+      refImageExists: false
     }
   },
 
@@ -317,9 +320,11 @@ export default {
           img.src = url
           refImages[url] = img
         }
+        this.refImageExists = false
         for (let image in refImages) {
           if (util.extractId(image) === currentID) {
             this.referenceImage = image
+            this.refImageExists = true
           }
         }
 
