@@ -25,7 +25,7 @@
       style="padding: 1em; position:fixed; width: 100%; height: 100%;"
     >
       <md-layout
-        style="padding: 1em; width:100%; height:100%"
+        style="padding: 1em; width:100%; height:100%; text-align:center"
         class="md-display-1 start"
         md-align="center"
         md-column
