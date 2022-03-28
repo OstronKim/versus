@@ -26,7 +26,7 @@
     >
       <md-layout
         style="padding: 1em; width:100%; height:100%; text-align:center"
-        class="md-display-1 start"
+        class="start"
         md-align="center"
         md-column
         md-vertical-align="center"
@@ -35,17 +35,43 @@
           {{ experimentAttr.text.sections.start.header }}
         </h2>
 
-        <p>
+        <p style="max-width: 50rem;">
           {{ experimentAttr.text.sections.start.blurb }}
         </p>
 
         <form v-on:submit.prevent="startSurvey">
+
+          <md-input-container>
+            <label>Ålder</label>
+            <!-- <md-input v-model="initial"></md-input> -->
+            <md-input required v-model.number="age" type="number"></md-input>
+          </md-input-container>
+
+          <b>Kön</b>
+          <div>
+            <md-radio v-model="gender" md-value="female">Kvinna</md-radio>
+            <md-radio v-model="gender" md-value="male">Man</md-radio>
+            <md-radio v-model="gender" md-value="other">Annat</md-radio>
+          </div>
+
+          <br>
+          <b>Har du arbetat med bilder/bildkvalitet?</b>
+          <div>
+            <md-radio v-model="imageExperience" md-value="none">Nej</md-radio>
+            <md-radio v-model="imageExperience" md-value="professional">Ja, professionellt</md-radio>
+            <md-radio v-model="imageExperience" md-value="education">Ja, i min utbildning</md-radio>
+          </div>
+
+          <p>age: {{age}}, gender: {{gender}}, imageExperience: {{imageExperience}}</p>
+
           <md-button
+            :disabled="!(Number.isInteger(age) && age > 0 && age < 200
+              && gender !== null && imageExperience !== null)"
             @click="startSurvey"
             class="md-raised md-primary"
             style="margin-left: 1em; padding:1em 4em"
           >
-            Begin
+            Start
           </md-button>
         </form>
       </md-layout>
@@ -194,6 +220,10 @@
 .done h5 {
   color: white;
 }
+
+/* .md-radio {
+  display: flex;
+} */
 </style>
 
 <script>
@@ -257,7 +287,10 @@ export default {
       isLoading: true,
       experimentAttr: {},
       referenceImage: null,
-      refImageExists: false
+      refImageExists: false,
+      age: null,
+      gender: null,
+      imageExperience: null
     }
   },
 
@@ -369,7 +402,10 @@ export default {
       let participateId = this.$route.params.participateId
       return rpc
         .rpcRun('publicSaveParticipantUserDetails', participateId, {
-          isQualified: true
+          isQualified: true,
+          age: this.age,
+          gender: this.gender,
+          imageExperience: this.imageExperience
         })
         .then(this.handleResponse)
     },
