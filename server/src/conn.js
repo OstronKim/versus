@@ -14,22 +14,31 @@ const dbConfig = require('./config')[env]
 const Sequelize = require('sequelize')
 let db = null
 
-if (env === 'development') {
-  db = new Sequelize(
-    dbConfig.database,
-    dbConfig.username,
-    dbConfig.password,
-    dbConfig)
-} else {
-  db = new Sequelize(process.env.DATABASE_URL, {
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false
-      }
+// if (env === 'development') {
+//   db = new Sequelize(
+//     dbConfig.database,
+//     dbConfig.username,
+//     dbConfig.password,
+//     dbConfig)
+// } else {
+//   db = new Sequelize(process.env.DATABASE_URL, {
+//     dialectOptions: {
+//       ssl: {
+//         require: true,
+//         rejectUnauthorized: false
+//       }
+//     }
+//   })
+// }
+
+db = new Sequelize(process.env.DATABASE_URL, {
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
     }
-  })
-}
+  }
+})
 
 db.authenticate()
   .then(() => {
