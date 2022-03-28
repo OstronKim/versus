@@ -62,8 +62,6 @@
             <md-radio v-model="imageExperience" md-value="education">Ja, i min utbildning</md-radio>
           </div>
 
-          <p>age: {{age}}, gender: {{gender}}, imageExperience: {{imageExperience}}</p>
-
           <md-button
             :disabled="!(Number.isInteger(age) && age > 0 && age < 200
               && gender !== null && imageExperience !== null)"
