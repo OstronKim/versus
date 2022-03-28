@@ -566,7 +566,7 @@ function makeCsv (experiment) {
   let isFoundHeader = false
   let imageSet = {}
 
-  let headerRow = ['participantId', 'surveyCode', 'time']
+  let headerRow = ['participantId', 'surveyCode', 'time', 'age', 'gender', 'imageExperience']
 
   for (let participant of experiment.participants) {
     if (!isFoundHeader) {
@@ -587,7 +587,10 @@ function makeCsv (experiment) {
     let row = [
       participant.participateId,
       participant.attr.surveyCode,
-      participant.attr.time
+      participant.attr.time,
+      participant.attr.user.age,
+      participant.attr.user.gender,
+      participant.attr.user.imageExperience
     ]
 
     for (let [imageSetId, state] of _.toPairs(participant.states)) {
