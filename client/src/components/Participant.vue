@@ -150,35 +150,37 @@
           v-if="!isLoading"
           v-for="(choice, i) of choices"
           :key="i"
-          md-align="center"
+          :class="i === 0 ? 'left-img' : 'right-img'"
         >
           <md-whiteframe
             md-elevation="5"
             style="
               margin-left: 1em;
-              margin-right: 1em"
+              margin-right: 1em;
+              margin-bottom: 1em;"
           >
             <div style="height: 1px;">
               <md-progress v-if="choice.isClick" md-indeterminate />
             </div>
 
             <integer-scaling-image :scale="1" :img-url="choice.fullUrl" />
+            <div
+              :style="{
+                width: '100%',
+                paddingTop: '1em',
+                paddingBottom: '1em',
+                textAlign: 'center'}"
+            >
+              <md-button
+                :disabled="isChosen"
+                class="md-raised choice"
+                @click="choose(choice)"
+              >
+                Choose
+              </md-button>
+            </div>
           </md-whiteframe>
 
-          <div
-            style="
-              width: 100%;
-              padding-top: 1em;
-              text-align: center;"
-          >
-            <md-button
-              :disabled="isChosen"
-              class="md-raised choice"
-              @click="choose(choice)"
-            >
-              Choose
-            </md-button>
-          </div>
         </md-layout>
       </md-layout>
 
@@ -217,6 +219,10 @@
 .done h4,
 .done h5 {
   color: white;
+}
+
+.left-img {
+  flex-direction: row-reverse;
 }
 
 /* .md-radio {
