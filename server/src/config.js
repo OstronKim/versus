@@ -9,10 +9,8 @@ module.exports = {
   port: process.env.PORT || 3000,
   development: {
     host: 'localhost',
-    dialect: 'postgres',
-    database: process.env.DATABASE_NAME,
-    username: process.env.DATABASE_USERNAME,
-    password: process.env.DATABASE_PASSWORD
+    dialect: 'sqlite',
+    storage: 'database.sqlite'
   },
   production: {
     // host: process.env.HOST,
