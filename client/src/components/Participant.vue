@@ -146,41 +146,42 @@
           <img style="height:300px" :src="question.fullUrl" />
         </md-layout>
 
-        <md-layout
-          v-if="!isLoading"
-          v-for="(choice, i) of choices"
-          :key="i"
-          :class="i === 0 ? 'left-img' : 'right-img'"
-        >
-          <md-whiteframe
-            md-elevation="5"
-            style="
-              margin-left: 1em;
-              margin-right: 1em;
-              margin-bottom: 1em;"
+        <md-layout md-align="center">
+          <div
+            v-if="!isLoading"
+            v-for="(choice, i) of choices"
+            :key="i"
           >
-            <div style="height: 1px;">
-              <md-progress v-if="choice.isClick" md-indeterminate />
-            </div>
-
-            <integer-scaling-image :scale="1" :img-url="choice.fullUrl" />
-            <div
-              :style="{
-                width: '100%',
-                paddingTop: '1em',
-                paddingBottom: '1em',
-                textAlign: 'center'}"
+            <md-whiteframe
+              md-elevation="5"
+              style="
+                margin-left: 1em;
+                margin-right: 1em;
+                margin-bottom: 1em;"
             >
-              <md-button
-                :disabled="isChosen"
-                class="md-raised choice"
-                @click="choose(choice)"
-              >
-                Choose
-              </md-button>
-            </div>
-          </md-whiteframe>
+              <div style="height: 1px;">
+                <md-progress v-if="choice.isClick" md-indeterminate />
+              </div>
 
+              <integer-scaling-image :scale="1" :img-url="choice.fullUrl" />
+              <div
+                :style="{
+                  width: '100%',
+                  paddingTop: '1em',
+                  paddingBottom: '1em',
+                  textAlign: 'center'}"
+              >
+                <md-button
+                  :disabled="isChosen"
+                  class="md-raised choice"
+                  @click="choose(choice)"
+                >
+                  Choose
+                </md-button>
+              </div>
+            </md-whiteframe>
+
+          </div>
         </md-layout>
       </md-layout>
 
