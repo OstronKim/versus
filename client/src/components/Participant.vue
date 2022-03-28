@@ -132,7 +132,7 @@
         </div>
 
         <div v-if="isLoading">
-          <md-spinner style="margin-top: 3em" :md-size="150" md-indeterminate />
+          <md-spinner style="margin-top: 3em;" :md-size="150" md-indeterminate />
           <div style="text-align: center">
             Loading...
           </div>
@@ -146,9 +146,8 @@
           <img style="height:300px" :src="question.fullUrl" />
         </md-layout>
 
-        <md-layout md-align="center">
+        <md-layout v-if="!isLoading" md-align="center">
           <div
-            v-if="!isLoading"
             v-for="(choice, i) of choices"
             :key="i"
           >
@@ -220,10 +219,6 @@
 .done h4,
 .done h5 {
   color: white;
-}
-
-.left-img {
-  flex-direction: row-reverse;
 }
 
 /* .md-radio {
