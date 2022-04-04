@@ -40,7 +40,6 @@
         </p>
 
         <form v-on:submit.prevent="startSurvey">
-
           <md-input-container>
             <label>Ålder</label>
             <!-- <md-input v-model="initial"></md-input> -->
@@ -54,17 +53,28 @@
             <md-radio v-model="gender" md-value="other">Annat</md-radio>
           </div>
 
-          <br>
+          <br />
           <b>Har du arbetat med bilder/bildkvalitet?</b>
           <div>
             <md-radio v-model="imageExperience" md-value="none">Nej</md-radio>
-            <md-radio v-model="imageExperience" md-value="professional">Ja, professionellt</md-radio>
-            <md-radio v-model="imageExperience" md-value="education">Ja, i min utbildning</md-radio>
+            <md-radio v-model="imageExperience" md-value="professional"
+              >Ja, professionellt</md-radio
+            >
+            <md-radio v-model="imageExperience" md-value="education"
+              >Ja, i min utbildning</md-radio
+            >
           </div>
 
           <md-button
-            :disabled="!(Number.isInteger(age) && age > 0 && age < 200
-              && gender !== null && imageExperience !== null)"
+            :disabled="
+              !(
+                Number.isInteger(age) &&
+                age > 0 &&
+                age < 200 &&
+                gender !== null &&
+                imageExperience !== null
+              )
+            "
             @click="startSurvey"
             class="md-raised md-primary"
             style="margin-left: 1em; padding:1em 4em"
@@ -90,14 +100,6 @@
         <p>
           {{ experimentAttr.text.sections.done.blurb }}
         </p>
-
-        <!-- <md-whiteframe
-          style="
-            padding: 0.5em;
-            text-transform: none;"
-        >
-          {{ surveyCode }}
-        </md-whiteframe> -->
       </md-layout>
     </div>
 
@@ -132,7 +134,11 @@
         </div>
 
         <div v-if="isLoading">
-          <md-spinner style="margin-top: 3em;" :md-size="150" md-indeterminate />
+          <md-spinner
+            style="margin-top: 3em;"
+            :md-size="150"
+            md-indeterminate
+          />
           <div style="text-align: center">
             Loading...
           </div>
@@ -147,10 +153,7 @@
         </md-layout>
 
         <md-layout v-if="!isLoading" md-align="center">
-          <div
-            v-for="(choice, i) of choices"
-            :key="i"
-          >
+          <div v-for="(choice, i) of choices" :key="i">
             <md-whiteframe
               md-elevation="5"
               style="
@@ -168,7 +171,8 @@
                   width: '100%',
                   paddingTop: '1em',
                   paddingBottom: '1em',
-                  textAlign: 'center'}"
+                  textAlign: 'center'
+                }"
               >
                 <md-button
                   :disabled="isChosen"
@@ -179,7 +183,6 @@
                 </md-button>
               </div>
             </md-whiteframe>
-
           </div>
         </md-layout>
       </md-layout>
@@ -220,10 +223,6 @@
 .done h5 {
   color: white;
 }
-
-/* .md-radio {
-  display: flex;
-} */
 </style>
 
 <script>

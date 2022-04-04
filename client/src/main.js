@@ -35,7 +35,7 @@ async function init () {
     router,
     store: new Vuex.Store(store),
     template: '<App/>',
-    components: {App}
+    components: { App }
   })
 }
 
