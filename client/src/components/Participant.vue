@@ -22,7 +22,7 @@
 
     <div
       v-if="status === 'start'"
-      style="padding: 1em; position:fixed; width: 100%; height: 100%;"
+      style="padding: 1em; position:fixed; width: 100%"
     >
       <md-layout
         style="padding: 1em; width:100%; height:100%; text-align:center"
@@ -39,39 +39,42 @@
           {{ experimentAttr.text.sections.start.blurb }}
         </p>
 
-        <form v-on:submit.prevent="startSurvey">
+        <div>
+          <form v-on:submit.prevent="startSurvey">
 
-          <md-input-container>
-            <label>Ålder</label>
-            <!-- <md-input v-model="initial"></md-input> -->
-            <md-input required v-model.number="age" type="number"></md-input>
-          </md-input-container>
+            <md-input-container>
+              <label>Ålder / Age</label>
+              <!-- <md-input v-model="initial"></md-input> -->
+              <md-input required v-model.number="age" type="number"></md-input>
+            </md-input-container>
 
-          <b>Kön</b>
-          <div>
-            <md-radio v-model="gender" md-value="female">Kvinna</md-radio>
-            <md-radio v-model="gender" md-value="male">Man</md-radio>
-            <md-radio v-model="gender" md-value="other">Annat</md-radio>
-          </div>
+            <b>Kön / Gender</b>
+            <div>
+              <md-radio v-model="gender" md-value="female">Kvinna / Female</md-radio>
+              <md-radio v-model="gender" md-value="male">Man / Male</md-radio>
+              <md-radio v-model="gender" md-value="other">Annat / Other</md-radio>
+              <md-radio v-model="gender" md-value="notspecified">Vill ej svara / Prefer not to answer</md-radio>
+            </div>
 
-          <br>
-          <b>Har du arbetat med bilder/bildkvalitet?</b>
-          <div>
-            <md-radio v-model="imageExperience" md-value="none">Nej</md-radio>
-            <md-radio v-model="imageExperience" md-value="professional">Ja, professionellt</md-radio>
-            <md-radio v-model="imageExperience" md-value="education">Ja, i min utbildning</md-radio>
-          </div>
+            <br>
+            <b>Har du arbetat med bilder eller bildkvalitet? / Have you worked with images or image quality?</b>
+            <div>
+              <md-radio v-model="imageExperience" md-value="none">Nej / No</md-radio>
+              <md-radio v-model="imageExperience" md-value="professional">Ja, professionellt / Yes, professionally</md-radio>
+              <md-radio v-model="imageExperience" md-value="education">Ja, i min utbildning / Yes, during my education</md-radio>
+            </div>
 
-          <md-button
-            :disabled="!(Number.isInteger(age) && age > 0 && age < 200
-              && gender !== null && imageExperience !== null)"
-            @click="startSurvey"
-            class="md-raised md-primary"
-            style="margin-left: 1em; padding:1em 4em"
-          >
-            Start
-          </md-button>
-        </form>
+            <md-button
+              :disabled="!(Number.isInteger(age) && age > 0 && age < 200
+                && gender !== null && imageExperience !== null)"
+              @click="startSurvey"
+              class="md-raised md-primary"
+              style="margin-left: 1em; padding:1em 4em"
+            >
+              Start
+            </md-button>
+          </form>
+        </div>
       </md-layout>
     </div>
 
