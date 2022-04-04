@@ -31,13 +31,9 @@
         md-column
         md-vertical-align="center"
       >
-        <h2 class="md-display-2">
-          {{ experimentAttr.text.sections.start.header }}
-        </h2>
+        <h2 class="md-display-2" style="white-space: pre-wrap">{{ experimentAttr.text.sections.start.header }}</h2>
 
-        <p style="max-width: 50rem;">
-          {{ experimentAttr.text.sections.start.blurb }}
-        </p>
+        <p style="max-width: 50rem; white-space: pre-wrap">{{ experimentAttr.text.sections.start.blurb }}</p>
 
         <div>
           <form v-on:submit.prevent="startSurvey">
@@ -86,13 +82,9 @@
         md-column
         md-vertical-align="center"
       >
-        <h2 class="md-display-2">
-          {{ experimentAttr.text.sections.done.header }}
-        </h2>
+        <h2 class="md-display-2" style="white-space: pre-wrap">{{ experimentAttr.text.sections.done.header }}</h2>
 
-        <p>
-          {{ experimentAttr.text.sections.done.blurb }}
-        </p>
+        <p style="white-space: pre-wrap">{{ experimentAttr.text.sections.done.blurb }}</p>
 
         <!-- <md-whiteframe
           style="
@@ -112,13 +104,9 @@
         md-column
         md-vertical-align="center"
       >
-        <h2 class="md-display-2">
-          {{ experimentAttr.text.sections.qualificationFailed.header }}
-        </h2>
+        <h2 class="md-display-2" style="white-space: pre-wrap">{{ experimentAttr.text.sections.qualificationFailed.header }}</h2>
 
-        <p>
-          {{ experimentAttr.text.sections.qualificationFailed.blurb }}
-        </p>
+        <p style="white-space: pre-wrap">{{ experimentAttr.text.sections.qualificationFailed.blurb }}</p>
       </md-layout>
     </div>
 
@@ -126,13 +114,9 @@
       <!-- <md-progress style="height: 8px" :md-progress="progress" /> -->
 
       <md-layout md-align="center" style="padding: 1em">
-        <h2 class="md-display-1" style="text-align: center">
-          {{ experimentAttr.text.sections.running.header }}
-        </h2>
+        <h2 class="md-display-1" style="text-align: center; white-space: pre-wrap">{{ experimentAttr.text.sections.running.header }}</h2>
 
-        <div style="width: 100%; text-align: center; margin-bottom: 1em">
-          {{ experimentAttr.text.sections.running.blurb }}
-        </div>
+        <div style="width: 100%; text-align: center; margin-bottom: 1em; white-space: pre-wrap">{{ experimentAttr.text.sections.running.blurb }}</div>
 
         <div v-if="isLoading">
           <md-spinner style="margin-top: 3em;" :md-size="150" md-indeterminate />
