@@ -133,10 +133,11 @@
           <img style="height:300px" :src="question.fullUrl" />
         </md-layout>
 
-        <md-layout v-if="!isLoading" md-align="center">
+        <md-layout v-if="!isLoading" md-align="center" style="flex-direction: row-reverse; flex-wrap: wrap-reverse">
           <div
             v-for="(choice, i) of choices"
             :key="i"
+            :style="{order: i == 0 ? 3 : 1}"
           >
             <md-whiteframe
               md-elevation="5"
@@ -162,28 +163,35 @@
                   class="md-raised choice"
                   @click="choose(choice)"
                 >
-                  Choose
+                  Välj / Choose
                 </md-button>
               </div>
             </md-whiteframe>
-
           </div>
+
+          <!-- REF IMAGE -->
+          <md-whiteframe
+            v-if="refImageExists"
+            md-elevation="5"
+            style="
+              margin-left: 1em;
+              margin-right: 1em;
+              margin-bottom: 1em;
+              order: 10;"
+          >
+            <integer-scaling-image :scale="1" :imgUrl="referenceImage" />
+            <div
+              :style="{
+                width: '100%',
+                paddingTop: '2.2em',
+                paddingBottom: '1em',
+                textAlign: 'center'}"
+            >
+              <b>Referens / Reference</b>
+            </div>
+          </md-whiteframe>
         </md-layout>
       </md-layout>
-
-      <div v-if="refImageExists">
-        <md-layout md-align="center">
-          <h2>Reference image</h2>
-        </md-layout>
-
-        <md-layout
-          md-align="center"
-          style="
-          margin-top: 1em;"
-        >
-          <integer-scaling-image :scale="1" :imgUrl="referenceImage" />
-        </md-layout>
-      </div>
     </div>
   </div>
 </template>
