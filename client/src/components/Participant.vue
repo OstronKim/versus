@@ -22,10 +22,10 @@
 
     <div
       v-if="status === 'start'"
-      style="padding: 1em; position:fixed; width: 100%"
+      style="padding: 1em; width: 100%"
     >
       <md-layout
-        style="padding: 1em; width:100%; height:100%; text-align:center"
+        style="padding: 1em; width:100%; text-align:center"
         class="start"
         md-align="center"
         md-column
