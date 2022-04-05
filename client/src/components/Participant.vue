@@ -22,7 +22,7 @@
 
     <div
       v-if="status === 'start'"
-      style="padding: 1em; position:fixed; width: 100%; height: 100%;"
+      style="padding: 1em; position:fixed; width: 100%"
     >
       <md-layout
         style="padding: 1em; width:100%; height:100%; text-align:center"
@@ -31,57 +31,71 @@
         md-column
         md-vertical-align="center"
       >
-        <h2 class="md-display-2">
+        <h2 class="md-display-2" style="white-space: pre-wrap">
           {{ experimentAttr.text.sections.start.header }}
         </h2>
 
-        <p style="max-width: 50rem;">
+        <p style="max-width: 50rem; white-space: pre-wrap">
           {{ experimentAttr.text.sections.start.blurb }}
         </p>
 
-        <form v-on:submit.prevent="startSurvey">
-          <md-input-container>
-            <label>Ålder</label>
-            <!-- <md-input v-model="initial"></md-input> -->
-            <md-input required v-model.number="age" type="number"></md-input>
-          </md-input-container>
+        <div>
+          <form v-on:submit.prevent="startSurvey">
+            <md-input-container>
+              <label>Ålder / Age</label>
+              <!-- <md-input v-model="initial"></md-input> -->
+              <md-input required v-model.number="age" type="number"></md-input>
+            </md-input-container>
 
-          <b>Kön</b>
-          <div>
-            <md-radio v-model="gender" md-value="female">Kvinna</md-radio>
-            <md-radio v-model="gender" md-value="male">Man</md-radio>
-            <md-radio v-model="gender" md-value="other">Annat</md-radio>
-          </div>
+            <b>Kön / Gender</b>
+            <div>
+              <md-radio v-model="gender" md-value="female"
+                >Kvinna / Female</md-radio
+              >
+              <md-radio v-model="gender" md-value="male">Man / Male</md-radio>
+              <md-radio v-model="gender" md-value="other"
+                >Annat / Other</md-radio
+              >
+              <md-radio v-model="gender" md-value="notspecified"
+                >Vill ej svara / Prefer not to answer</md-radio
+              >
+            </div>
 
-          <br />
-          <b>Har du arbetat med bilder/bildkvalitet?</b>
-          <div>
-            <md-radio v-model="imageExperience" md-value="none">Nej</md-radio>
-            <md-radio v-model="imageExperience" md-value="professional"
-              >Ja, professionellt</md-radio
+            <br />
+            <b
+              >Har du arbetat med bilder eller bildkvalitet? / Have you worked
+              with images or image quality?</b
             >
-            <md-radio v-model="imageExperience" md-value="education"
-              >Ja, i min utbildning</md-radio
-            >
-          </div>
+            <div>
+              <md-radio v-model="imageExperience" md-value="none"
+                >Nej / No</md-radio
+              >
+              <md-radio v-model="imageExperience" md-value="professional"
+                >Ja, professionellt / Yes, professionally</md-radio
+              >
+              <md-radio v-model="imageExperience" md-value="education"
+                >Ja, i min utbildning / Yes, during my education</md-radio
+              >
+            </div>
 
-          <md-button
-            :disabled="
-              !(
-                Number.isInteger(age) &&
-                age > 0 &&
-                age < 200 &&
-                gender !== null &&
-                imageExperience !== null
-              )
-            "
-            @click="startSurvey"
-            class="md-raised md-primary"
-            style="margin-left: 1em; padding:1em 4em"
-          >
-            Start
-          </md-button>
-        </form>
+            <md-button
+              :disabled="
+                !(
+                  Number.isInteger(age) &&
+                  age > 0 &&
+                  age < 200 &&
+                  gender !== null &&
+                  imageExperience !== null
+                )
+              "
+              @click="startSurvey"
+              class="md-raised md-primary"
+              style="margin-left: 1em; padding:1em 4em"
+            >
+              Start
+            </md-button>
+          </form>
+        </div>
       </md-layout>
     </div>
 
@@ -93,13 +107,21 @@
         md-column
         md-vertical-align="center"
       >
-        <h2 class="md-display-2">
+        <h2 class="md-display-2" style="white-space: pre-wrap">
           {{ experimentAttr.text.sections.done.header }}
         </h2>
 
-        <p>
+        <p style="white-space: pre-wrap">
           {{ experimentAttr.text.sections.done.blurb }}
         </p>
+
+        <!-- <md-whiteframe
+          style="
+            padding: 0.5em;
+            text-transform: none;"
+        >
+          {{ surveyCode }}
+        </md-whiteframe> -->
       </md-layout>
     </div>
 
@@ -111,11 +133,11 @@
         md-column
         md-vertical-align="center"
       >
-        <h2 class="md-display-2">
+        <h2 class="md-display-2" style="white-space: pre-wrap">
           {{ experimentAttr.text.sections.qualificationFailed.header }}
         </h2>
 
-        <p>
+        <p style="white-space: pre-wrap">
           {{ experimentAttr.text.sections.qualificationFailed.blurb }}
         </p>
       </md-layout>
@@ -125,11 +147,16 @@
       <!-- <md-progress style="height: 8px" :md-progress="progress" /> -->
 
       <md-layout md-align="center" style="padding: 1em">
-        <h2 class="md-display-1" style="text-align: center">
+        <h2
+          class="md-display-1"
+          style="text-align: center; white-space: pre-wrap"
+        >
           {{ experimentAttr.text.sections.running.header }}
         </h2>
 
-        <div style="width: 100%; text-align: center; margin-bottom: 1em">
+        <div
+          style="width: 100%; text-align: center; margin-bottom: 1em; white-space: pre-wrap"
+        >
           {{ experimentAttr.text.sections.running.blurb }}
         </div>
 
@@ -152,8 +179,16 @@
           <img style="height:300px" :src="question.fullUrl" />
         </md-layout>
 
-        <md-layout v-if="!isLoading" md-align="center">
-          <div v-for="(choice, i) of choices" :key="i">
+        <md-layout
+          v-if="!isLoading"
+          md-align="center"
+          style="flex-direction: row-reverse; flex-wrap: wrap-reverse"
+        >
+          <div
+            v-for="(choice, i) of choices"
+            :key="i"
+            :style="{ order: i == 0 ? 3 : 1 }"
+          >
             <md-whiteframe
               md-elevation="5"
               style="
@@ -179,27 +214,36 @@
                   class="md-raised choice"
                   @click="choose(choice)"
                 >
-                  Choose
+                  Välj / Choose
                 </md-button>
               </div>
             </md-whiteframe>
           </div>
+
+          <!-- REF IMAGE -->
+          <md-whiteframe
+            v-if="refImageExists"
+            md-elevation="5"
+            style="
+              margin-left: 1em;
+              margin-right: 1em;
+              margin-bottom: 1em;
+              order: 10;"
+          >
+            <integer-scaling-image :scale="1" :imgUrl="referenceImage" />
+            <div
+              :style="{
+                width: '100%',
+                paddingTop: '2.2em',
+                paddingBottom: '1em',
+                textAlign: 'center'
+              }"
+            >
+              <b>Referens / Reference</b>
+            </div>
+          </md-whiteframe>
         </md-layout>
       </md-layout>
-
-      <div v-if="refImageExists">
-        <md-layout md-align="center">
-          <h2>Reference image</h2>
-        </md-layout>
-
-        <md-layout
-          md-align="center"
-          style="
-          margin-top: 1em;"
-        >
-          <integer-scaling-image :scale="1" :imgUrl="referenceImage" />
-        </md-layout>
-      </div>
     </div>
   </div>
 </template>
