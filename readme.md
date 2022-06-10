@@ -1,6 +1,6 @@
-
-
 # Versus
+
+This fork currently contains a lot of hacks for our usage.
 
 ## Description
 
